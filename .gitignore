@@ -1,1 +1,31 @@
-node_modules
+# Ignore node_modules directory
+node_modules/
+
+# Ignore logs and other generated files
+logs/
+*.log
+npm-debug.log*
+
+# Ignore environment files
+.env
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore project specific files/directories
+/dist/
+/build/
+/public/
+
+# Ignore package-lock.json for npm
+package-lock.json
+
+# Ignore yarn.lock for yarn
+yarn.lock
+
+# Ignore database files
+*.sqlite
+*.db
+
+# Ignore macOS system files
+.DS_Store
