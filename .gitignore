@@ -13,7 +13,7 @@ npm-debug.log*
 .vscode/
 
 # Ignore project specific files/directories
-/dist/
+# /dist/
 /build/
 /public/
 
