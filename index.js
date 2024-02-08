@@ -45,12 +45,13 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  console.log('info');
-  const personCount = persons.length
-  const dateTime = new Date().toString()
-  const infoMessage = `<p>Phonebook has info for ${personCount} people</p>
-  <p>${dateTime}</p>`
-  response.send(infoMessage)
+  Person.countDocuments({})
+    .then(personCount => {
+      const dateTime = new Date().toString()
+      const infoMessage = `<p>Phonebook has info for ${personCount} people</p><p>${dateTime}</p>`
+      response.send(infoMessage)
+    })
+    .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
