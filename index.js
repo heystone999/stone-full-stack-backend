@@ -45,13 +45,9 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-  if (person) {
+  Person.findById(request.params.id).then(person => {
     response.json(person)
-  } else {
-    response.status(404).end()
-  }
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
@@ -67,18 +63,18 @@ app.post('/api/persons', (request, response) => {
       error: 'name or number is missing'
     })
   }
-  if (persons.find(person => person.name === body.name)) {
-    return response.status(400).json({
-      error: 'name must be unique'
-    })
-  }
-  const newPerson = {
-    id: Math.floor(Math.random() * 100000),
+  // if (persons.find(person => person.name === body.name)) {
+  //   return response.status(400).json({
+  //     error: 'name must be unique'
+  //   })
+  // }
+  const person = new Person({
     name: body.name,
     number: body.number
-  }
-  persons = persons.concat(newPerson)
-  response.json(newPerson)
+  })
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 })
 
 
