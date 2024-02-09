@@ -45,7 +45,7 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
   Person.countDocuments({})
     .then(personCount => {
       const dateTime = new Date().toString()
@@ -67,7 +67,7 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
@@ -117,4 +117,4 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT)
-console.log(`Server running on port ${PORT}`);
+console.log(`Server running on port ${PORT}`)
